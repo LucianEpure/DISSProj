@@ -21,8 +21,6 @@ dependencies {
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
-
-	compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.2.7.RELEASE'
 }
 
 test {
