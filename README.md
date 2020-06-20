@@ -14,3 +14,5 @@ Cand rulati clasa cu main ar trebui sa se conecteze la db si sa faca tabelele de
 Momentan nu am adaugat niciun algoritm de criptat parola din db deci totul apare in plain text acum "O nu!!!"(probabil ziceti acum socati cu totii). Este ceva nebunie in spring dar o sa fie mai complex de configurat dar probabil o sa adaug in curand daca e musai :) .
 
 Momentan daca intrati la http://localhost:8080/greeting dupa ce ati pornit aplicatia si v-a facut deploy o sa va arate un JSON returnat din app.
+
+lala
