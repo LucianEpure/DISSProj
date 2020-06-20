@@ -1,6 +1,7 @@
 package application;
 
 import entities.Role;
+import entities.TimeSheet;
 import entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -52,5 +53,10 @@ public class Bootstrap {
         user2Roles.add(user2Role);
         user2.setRoles(user2Roles);
         userService.registerUser(user2);
+    }
+
+    private void addTimesheet() {
+        TimeSheet timeSheet = new TimeSheet();
+        timeSheet.
     }
 }
