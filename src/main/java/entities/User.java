@@ -20,6 +20,14 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private List<Role> roles;
 
+
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "message_receivers",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "message_id", referencedColumnName = "id"))
+    private List<Message> messages;
+
     public User(){
         roles = new ArrayList<Role>();
     }
@@ -49,5 +57,12 @@ public class User {
     }
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
     }
 }
