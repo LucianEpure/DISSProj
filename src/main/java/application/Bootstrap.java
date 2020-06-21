@@ -11,8 +11,10 @@ import services.MessageService;
 import services.UserService;
 
 import javax.annotation.PostConstruct;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -95,18 +97,22 @@ public class Bootstrap {
         message1.setAuthor(sender);
         message1.setContent("AAAAAAAAAAAAAAA");
         message1.setTitle("Message 1");
+        message1.setMessageDate(new Date());
+
         List<User> receivers1 = new ArrayList<>();
         message1.setReceivers(receivers1);
 
         message2.setAuthor(sender);
         message2.setContent("AAAAAAAAAAAAAAA");
         message2.setTitle("Message 2");
+        message2.setMessageDate(new Date());
         List<User> receivers2 = new ArrayList<>();
         message2.setReceivers(receivers2);
 
         message3.setAuthor(sender);
         message3.setContent("AAAAAAAAAAAAAAA");
         message3.setTitle("Message 3");
+        message3.setMessageDate(new Date());
         List<User> receivers3 = new ArrayList<>();
         message3.setReceivers(receivers3);
 
@@ -129,18 +135,23 @@ public class Bootstrap {
 
     private void seeMessages()
     {
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy"); // use for date format
         User user1 = userService.findUser("Emp1");
         List<Message> messages1 = messageService.getMessages(user1);
         System.out.println("Emp 1:");
         for(Message m: messages1){
             System.out.println(m.getTitle());
+            System.out.println(formatter.format(m.getMessageDate()));
         }
+
 
         System.out.println("Emp 2:");
         User user2 = userService.findUser("Emp2");
         List<Message> messages2 = messageService.getMessages(user2);
         for(Message m: messages2){
             System.out.println(m.getTitle());
+            System.out.println(formatter.format(m.getMessageDate()));
         }
 
     }
