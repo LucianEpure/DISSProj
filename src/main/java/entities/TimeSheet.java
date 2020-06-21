@@ -13,9 +13,11 @@ public class TimeSheet {
     private Date date;
     private String timeSheetType;
     private Time time;
-
+/*
     @ManyToOne()
     @JoinColumn(name = "user_id")
     private User user;
+
+ */
 
 }
