@@ -7,16 +7,13 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-
-    public Role(){
-
-    }
-    public Role(String name){
-        this.roleName = name;
-    }
     @Column(unique = true)
     private String roleName;
 
+    public Role(){ }
+    public Role(String name){
+        this.roleName = name;
+    }
     public String getRoleName() {
         return roleName;
     }

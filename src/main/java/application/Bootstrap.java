@@ -8,9 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import repositories.RoleRepository;
 import services.MessageService;
+import services.TimeSheetService;
 import services.UserService;
 
 import javax.annotation.PostConstruct;
+import javax.swing.*;
+import java.sql.Time;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,11 +27,13 @@ public class Bootstrap {
     private MessageService messageService;
     private RoleRepository roleRepository;
     private UserService userService;
+    private TimeSheetService timeSheetService;
     @Autowired
-    public Bootstrap(MessageService messageService, UserService userService, RoleRepository roleRepository){
+    public Bootstrap(MessageService messageService, UserService userService, RoleRepository roleRepository, TimeSheetService timeSheetService){
         this.roleRepository = roleRepository;
         this.userService = userService;
         this.messageService = messageService;
+        this.timeSheetService = timeSheetService;
     }
 
     @PostConstruct
@@ -34,8 +41,10 @@ public class Bootstrap {
        initRoles();
        initUsers();
 
-      addMessages();
-        seeMessages();
+       addMessages();
+       seeMessages();
+
+       initAttendance();
     }
 
     private void initRoles() {
@@ -129,13 +138,10 @@ public class Bootstrap {
         finalMessage3 = messageService.addReceiverToMessage(finalMessage3, receiver);
         messageService.sendMessage(finalMessage3);
 
-
-
     }
 
     private void seeMessages()
     {
-
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy"); // use for date format
         User user1 = userService.findUser("Emp1");
         List<Message> messages1 = messageService.getMessages(user1);
@@ -145,7 +151,6 @@ public class Bootstrap {
             System.out.println(formatter.format(m.getMessageDate()));
         }
 
-
         System.out.println("Emp 2:");
         User user2 = userService.findUser("Emp2");
         List<Message> messages2 = messageService.getMessages(user2);
@@ -153,6 +158,147 @@ public class Bootstrap {
             System.out.println(m.getTitle());
             System.out.println(formatter.format(m.getMessageDate()));
         }
-
     }
+
+    private void initAttendance() {
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm");
+        Date date = null;
+        Date time = null;
+        TimeSheet timeSheet1 = new TimeSheet();
+        try {
+            date = dateFormatter.parse("22/06/2020");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        timeSheet1.setDate(date);
+        try {
+            time = timeFormatter.parse("09:04");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        timeSheet1.setStartTime(time);
+        try {
+            time = timeFormatter.parse("17:41");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        timeSheet1.setEndTime(time);
+        try {
+            time = timeFormatter.parse("08:37");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        timeSheet1.setWorkedHours(time);
+        timeSheetService.insertTimeSheet(timeSheet1);
+
+        TimeSheet timeSheet2 = new TimeSheet();
+        try {
+            date = dateFormatter.parse("23/06/2020");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        timeSheet2.setDate(date);
+        try {
+            time = timeFormatter.parse("10:05");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        timeSheet2.setStartTime(time);
+        try {
+            time = timeFormatter.parse("17:41");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        timeSheet2.setEndTime(time);
+        try {
+            time = timeFormatter.parse("07:36");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        timeSheet2.setWorkedHours(time);
+        timeSheetService.insertTimeSheet(timeSheet2);
+
+        TimeSheet timeSheet3 = new TimeSheet();
+        try {
+            date = dateFormatter.parse("22/06/2020");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        timeSheet3.setDate(date);
+        try {
+            time = timeFormatter.parse("09:04");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        timeSheet3.setStartTime(time);
+        try {
+            time = timeFormatter.parse("17:41");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        timeSheet3.setEndTime(time);
+        try {
+            time = timeFormatter.parse("08:37");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        timeSheet3.setWorkedHours(time);
+        timeSheetService.insertTimeSheet(timeSheet3);
+
+        TimeSheet timeSheet4 = new TimeSheet();
+        try {
+            date = dateFormatter.parse("22/06/2020");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        timeSheet4.setDate(date);
+        try {
+            time = timeFormatter.parse("09:04");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        timeSheet4.setStartTime(time);
+        try {
+            time = timeFormatter.parse("17:41");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        timeSheet4.setEndTime(time);
+        try {
+            time = timeFormatter.parse("08:37");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        timeSheet4.setWorkedHours(time);
+        timeSheetService.insertTimeSheet(timeSheet4);
+
+        TimeSheet timeSheet5 = new TimeSheet();
+        try {
+            date = dateFormatter.parse("22/06/2020");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        timeSheet5.setDate(date);
+        try {
+            time = timeFormatter.parse("09:04");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        timeSheet5.setStartTime(time);
+        try {
+            time = timeFormatter.parse("17:41");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        timeSheet5.setEndTime(time);
+        try {
+            time = timeFormatter.parse("08:37");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        timeSheet5.setWorkedHours(time);
+        timeSheetService.insertTimeSheet(timeSheet5);
+    }
+
 }
