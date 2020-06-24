@@ -24,18 +24,10 @@ public class TimeSheetServiceImpl implements TimeSheetService{
     @Override
     public void insertTimeSheet(TimeSheet timeSheet) {
         TimeSheet dbTimeSheet = new TimeSheet();
-        dbTimeSheet.setDate(timeSheet.getDate());
-        dbTimeSheet.setStartTime(timeSheet.getStartTime());
-        dbTimeSheet.setEndTime(timeSheet.getEndTime());
+        dbTimeSheet.setStart(timeSheet.getStart());
+        dbTimeSheet.setEnd(timeSheet.getEnd());
         dbTimeSheet.setWorkedHours(timeSheet.getWorkedHours());
         timeSheetRepository.save(dbTimeSheet);
-    }
-
-    @Override
-    public List<TimeSheet> getTodayTimeSheet() {
-        Date today = new Date();
-        List<TimeSheet> dbTimeSheet = timeSheetRepository.findByDate(today);
-        return dbTimeSheet;
     }
 
     @Override

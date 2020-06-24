@@ -9,8 +9,6 @@ public interface TimeSheetService {
 
     public void insertTimeSheet(TimeSheet timeSheet);
 
-    public List<TimeSheet> getTodayTimeSheet();
-
     public List<TimeSheet> getTimeSheetByUser(User user);
 
 }

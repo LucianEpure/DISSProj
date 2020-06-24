@@ -7,5 +7,5 @@ import java.util.Date;
 import java.util.List;
 
 public interface TimeSheetRepository extends JpaRepository<TimeSheet, Integer> {
-    List<TimeSheet> findByDate(Date date);
+//    List<TimeSheet> findByDate(Date date);
 }

@@ -48,50 +48,50 @@ public class Bootstrap {
     }
 
     private void initRoles() {
-        Role admin = new Role("ADMIN");
-        Role humanResources = new Role("HR");
-        Role employee = new Role("EMPLOYEE");
-        roleRepository.save(admin);
-        roleRepository.save(humanResources);
-        roleRepository.save(employee);
+//        Role admin = new Role("ADMIN");
+//        Role humanResources = new Role("HR");
+//        Role employee = new Role("EMPLOYEE");
+//        roleRepository.save(admin);
+//        roleRepository.save(humanResources);
+//        roleRepository.save(employee);
     }
 
     private void initUsers() {
-        User user1 = new User();
-        user1.setUsername("Admin1");
-        user1.setPassword("1234");
-        List<Role> user1Roles = new ArrayList<Role>();
-        Role user1Role = roleRepository.findByRoleName("ADMIN");
-        user1Roles.add(user1Role);
-        user1.setRoles(user1Roles);
-        userService.registerUser(user1);
-
-        User user2 = new User();
-        user2.setUsername("Gigel");
-        user2.setPassword("1234");
-        List<Role> user2Roles = new ArrayList<Role>();
-        Role user2Role = roleRepository.findByRoleName("HR");
-        user2Roles.add(user2Role);
-        user2.setRoles(user2Roles);
-        userService.registerUser(user2);
-
-        User user3 = new User();
-        user3.setUsername("Emp1");
-        user3.setPassword("1234");
-        List<Role> user3Roles = new ArrayList<Role>();
-        Role user3Role = roleRepository.findByRoleName("EMPLOYEE");
-        user3Roles.add(user3Role);
-        user3.setRoles(user3Roles);
-        userService.registerUser(user3);
-
-        User user4 = new User();
-        user4.setUsername("Emp2");
-        user4.setPassword("1234");
-        List<Role> user4Roles = new ArrayList<Role>();
-        Role user4Role = roleRepository.findByRoleName("EMPLOYEE");
-        user4Roles.add(user4Role);
-        user4.setRoles(user4Roles);
-        userService.registerUser(user4);
+//        User user1 = new User();
+//        user1.setUsername("Admin1");
+//        user1.setPassword("1234");
+//        List<Role> user1Roles = new ArrayList<Role>();
+//        Role user1Role = roleRepository.findByRoleName("ADMIN");
+//        user1Roles.add(user1Role);
+//        user1.setRoles(user1Roles);
+//        userService.registerUser(user1);
+//
+//        User user2 = new User();
+//        user2.setUsername("Gigel");
+//        user2.setPassword("1234");
+//        List<Role> user2Roles = new ArrayList<Role>();
+//        Role user2Role = roleRepository.findByRoleName("HR");
+//        user2Roles.add(user2Role);
+//        user2.setRoles(user2Roles);
+//        userService.registerUser(user2);
+//
+//        User user3 = new User();
+//        user3.setUsername("Emp1");
+//        user3.setPassword("1234");
+//        List<Role> user3Roles = new ArrayList<Role>();
+//        Role user3Role = roleRepository.findByRoleName("EMPLOYEE");
+//        user3Roles.add(user3Role);
+//        user3.setRoles(user3Roles);
+//        userService.registerUser(user3);
+//
+//        User user4 = new User();
+//        user4.setUsername("Emp2");
+//        user4.setPassword("1234");
+//        List<Role> user4Roles = new ArrayList<Role>();
+//        Role user4Role = roleRepository.findByRoleName("EMPLOYEE");
+//        user4Roles.add(user4Role);
+//        user4.setRoles(user4Roles);
+//        userService.registerUser(user4);
     }
 
     private void addMessages() {
@@ -161,144 +161,140 @@ public class Bootstrap {
     }
 
     private void initAttendance() {
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
-        SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm");
+        User user1 = userService.findUser("Gigel");
+        User user2 = userService.findUser("Emp1");
+        User user3 = userService.findUser("Emp2");
         Date date = null;
-        Date time = null;
         TimeSheet timeSheet1 = new TimeSheet();
         try {
-            date = dateFormatter.parse("22/06/2020");
+            date = new SimpleDateFormat("yyy-MM-dd hh:mm:ss").parse("2020-06-20 09:45:06");
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        timeSheet1.setDate(date);
+        timeSheet1.setStart(date);
         try {
-            time = timeFormatter.parse("09:04");
+            date = new SimpleDateFormat("yyy-MM-dd hh:mm:ss").parse("2020-06-20 17:45:06");
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        timeSheet1.setStartTime(time);
-        try {
-            time = timeFormatter.parse("17:41");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        timeSheet1.setEndTime(time);
-        try {
-            time = timeFormatter.parse("08:37");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        timeSheet1.setWorkedHours(time);
+        timeSheet1.setEnd(date);
+        timeSheet1.setWorkedHours("08:00");
         timeSheetService.insertTimeSheet(timeSheet1);
 
         TimeSheet timeSheet2 = new TimeSheet();
         try {
-            date = dateFormatter.parse("23/06/2020");
+            date = new SimpleDateFormat("yyy-MM-dd hh:mm:ss").parse("2020-06-21 09:45:06");
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        timeSheet2.setDate(date);
+        timeSheet2.setStart(date);
         try {
-            time = timeFormatter.parse("10:05");
+            date = new SimpleDateFormat("yyy-MM-dd hh:mm:ss").parse("2020-06-21 17:45:06");
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        timeSheet2.setStartTime(time);
-        try {
-            time = timeFormatter.parse("17:41");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        timeSheet2.setEndTime(time);
-        try {
-            time = timeFormatter.parse("07:36");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        timeSheet2.setWorkedHours(time);
+        timeSheet2.setEnd(date);
+        timeSheet2.setWorkedHours("08:00");
         timeSheetService.insertTimeSheet(timeSheet2);
+
+        List<TimeSheet> attendance1 = new ArrayList<TimeSheet>();
+        attendance1.add(timeSheet1);
+        attendance1.add(timeSheet2);
+        user1.setAttendance(attendance1);
+        userService.addAttendance(user1);
 
         TimeSheet timeSheet3 = new TimeSheet();
         try {
-            date = dateFormatter.parse("22/06/2020");
+            date = new SimpleDateFormat("yyy-MM-dd hh:mm:ss").parse("2020-06-22 09:45:06");
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        timeSheet3.setDate(date);
+        timeSheet3.setStart(date);
         try {
-            time = timeFormatter.parse("09:04");
+            date = new SimpleDateFormat("yyy-MM-dd hh:mm:ss").parse("2020-06-22 17:45:06");
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        timeSheet3.setStartTime(time);
-        try {
-            time = timeFormatter.parse("17:41");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        timeSheet3.setEndTime(time);
-        try {
-            time = timeFormatter.parse("08:37");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        timeSheet3.setWorkedHours(time);
+        timeSheet3.setEnd(date);
+        timeSheet3.setWorkedHours("08:00");
         timeSheetService.insertTimeSheet(timeSheet3);
 
         TimeSheet timeSheet4 = new TimeSheet();
         try {
-            date = dateFormatter.parse("22/06/2020");
+            date = new SimpleDateFormat("yyy-MM-dd hh:mm:ss").parse("2020-06-23 09:45:06");
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        timeSheet4.setDate(date);
+        timeSheet4.setStart(date);
         try {
-            time = timeFormatter.parse("09:04");
+            date = new SimpleDateFormat("yyy-MM-dd hh:mm:ss").parse("2020-06-23 17:45:06");
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        timeSheet4.setStartTime(time);
-        try {
-            time = timeFormatter.parse("17:41");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        timeSheet4.setEndTime(time);
-        try {
-            time = timeFormatter.parse("08:37");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        timeSheet4.setWorkedHours(time);
+        timeSheet4.setEnd(date);
+        timeSheet4.setWorkedHours("08:00");
         timeSheetService.insertTimeSheet(timeSheet4);
+
+        List<TimeSheet> attendance2 = new ArrayList<TimeSheet>();
+        attendance2.add(timeSheet3);
+        attendance2.add(timeSheet4);
+        user2.setAttendance(attendance2);
+        userService.addAttendance(user2);
 
         TimeSheet timeSheet5 = new TimeSheet();
         try {
-            date = dateFormatter.parse("22/06/2020");
+            date = new SimpleDateFormat("yyy-MM-dd hh:mm:ss").parse("2020-06-24 09:45:06");
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        timeSheet5.setDate(date);
+        timeSheet5.setStart(date);
         try {
-            time = timeFormatter.parse("09:04");
+            date = new SimpleDateFormat("yyy-MM-dd hh:mm:ss").parse("2020-06-24 17:45:06");
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        timeSheet5.setStartTime(time);
-        try {
-            time = timeFormatter.parse("17:41");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        timeSheet5.setEndTime(time);
-        try {
-            time = timeFormatter.parse("08:37");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        timeSheet5.setWorkedHours(time);
+        timeSheet5.setEnd(date);
+        timeSheet5.setWorkedHours("08:00");
         timeSheetService.insertTimeSheet(timeSheet5);
+
+        TimeSheet timeSheet6 = new TimeSheet();
+        try {
+            date = new SimpleDateFormat("yyy-MM-dd hh:mm:ss").parse("2020-06-25 09:45:06");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        timeSheet6.setStart(date);
+        try {
+            date = new SimpleDateFormat("yyy-MM-dd hh:mm:ss").parse("2020-06-25 17:45:06");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        timeSheet6.setEnd(date);
+        timeSheet6.setWorkedHours("08:00");
+        timeSheetService.insertTimeSheet(timeSheet6);
+
+        TimeSheet timeSheet7 = new TimeSheet();
+        try {
+            date = new SimpleDateFormat("yyy-MM-dd hh:mm:ss").parse("2020-06-25 09:45:06");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        timeSheet7.setStart(date);
+        try {
+            date = new SimpleDateFormat("yyy-MM-dd hh:mm:ss").parse("2020-06-25 17:45:06");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        timeSheet7.setEnd(date);
+        timeSheet7.setWorkedHours("08:00");
+        timeSheetService.insertTimeSheet(timeSheet7);
+
+        List<TimeSheet> attendance3 = new ArrayList<TimeSheet>();
+        attendance3.add(timeSheet5);
+        attendance3.add(timeSheet6);
+        attendance3.add(timeSheet7);
+        user3.setAttendance(attendance3);
+        userService.addAttendance(user3);
     }
 
 }

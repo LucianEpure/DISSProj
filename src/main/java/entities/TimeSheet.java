@@ -10,40 +10,33 @@ public class TimeSheet {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    private Date date;
-    private Date startTime;
-    private Date endTime;
-    private Date workedHours;
+    private Date start;
+    private Date end;
+    private String workedHours;
 
 
     public void setId(int id){
         this.id = id;
     }
-    public void setDate(Date date){
-        this.date = date;
+    public void setStart(Date date){
+        this.start = date;
     }
-    public void setStartTime(Date time) {
-        this.startTime = time;
+    public void setEnd(Date time) {
+        this.end = time;
     }
-    public void setEndTime(Date time) {
-        this.endTime = time;
-    }
-    public void setWorkedHours(Date time) {
+    public void setWorkedHours(String time) {
         this.workedHours = time;
     }
     public int getId() {
         return id;
     }
-    public Date getDate() {
-        return  date;
+    public Date getStart() {
+        return  start;
     }
-    public Date getStartTime() {
-        return startTime;
+    public Date getEnd() {
+        return end;
     }
-    public Date getEndTime() {
-        return endTime;
-    }
-    public Date getWorkedHours() {
+    public String getWorkedHours() {
         return workedHours;
     }
 }
