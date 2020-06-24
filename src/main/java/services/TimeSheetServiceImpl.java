@@ -1,5 +1,6 @@
 package services;
 
+import entities.Role;
 import entities.TimeSheet;
 import entities.User;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,12 @@ public class TimeSheetServiceImpl implements TimeSheetService{
 
     @Override
     public void insertTimeSheet(TimeSheet timeSheet) {
-        timeSheetRepository.save(timeSheet);
+        TimeSheet dbTimeSheet = new TimeSheet();
+        dbTimeSheet.setDate(timeSheet.getDate());
+        dbTimeSheet.setStartTime(timeSheet.getStartTime());
+        dbTimeSheet.setEndTime(timeSheet.getEndTime());
+        dbTimeSheet.setWorkedHours(timeSheet.getWorkedHours());
+        timeSheetRepository.save(dbTimeSheet);
     }
 
     @Override

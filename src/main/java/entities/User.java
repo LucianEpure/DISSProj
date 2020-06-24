@@ -28,7 +28,7 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "message_id", referencedColumnName = "id"))
     private List<Message> messages;
 
-    @OneToMany()
+    @ManyToMany()
     @JoinTable(name = "attendance",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "attendance_id", referencedColumnName = "id"))
