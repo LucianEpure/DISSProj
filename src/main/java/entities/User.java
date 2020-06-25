@@ -28,18 +28,22 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "message_id", referencedColumnName = "id"))
     private List<Message> messages;
 
+    @ManyToMany()
+    @JoinTable(name = "attendance",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "attendance_id", referencedColumnName = "id"))
+    private List<TimeSheet> timeSheets;
+
     public User(){
         roles = new ArrayList<Role>();
+        timeSheets = new ArrayList<TimeSheet>();
     }
-
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
-
     public String getUsername() {
         return username;
     }
@@ -61,8 +65,13 @@ public class User {
     public List<Message> getMessages() {
         return messages;
     }
-
     public void setMessages(List<Message> messages) {
         this.messages = messages;
+    }
+    public List<TimeSheet> getAttendance() {
+        return timeSheets;
+    }
+    public void setAttendance(List<TimeSheet> attendance){
+        this.timeSheets = attendance;
     }
 }

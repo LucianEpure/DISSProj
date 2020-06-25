@@ -1,6 +1,7 @@
 package services;
 
 import entities.Role;
+import entities.TimeSheet;
 import entities.User;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
@@ -48,5 +49,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public void addUser(User user) {
         userRepository.save(user);
+    }
+    public void addAttendance(User user) {
+        User dbUser = userRepository.findByUsername(user.getUsername());
+        List<TimeSheet> attendance = user.getAttendance();
+        dbUser.setAttendance(attendance);
+//        userRepository.save(dbUser);
     }
 }
