@@ -38,4 +38,15 @@ public class UserServiceImpl implements UserService {
     public User findUser(String username) {
         return userRepository.findByUsername(username);
     }
+
+    @Override
+    public List<User> getUsers() {
+        return userRepository.findAll();
+    }
+
+    //add logic to customize user properly with role and stuff
+    @Override
+    public void addUser(User user) {
+        userRepository.save(user);
+    }
 }

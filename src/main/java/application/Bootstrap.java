@@ -31,11 +31,11 @@ public class Bootstrap {
 
     @PostConstruct
     private void initialize(){
-       initRoles();
-       initUsers();
+      // initRoles();
+       //initUsers();
 
-      addMessages();
-        seeMessages();
+      //addMessages();
+       // seeMessages();
     }
 
     private void initRoles() {
