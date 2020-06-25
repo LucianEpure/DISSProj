@@ -165,8 +165,10 @@ public class TimeSheetServiceImpl implements TimeSheetService{
         if (employees != null) {
             for (User u:employees) {
                 List<TimeSheet> timeSheetList = getTimeSheetByUser(u);
-                TimeSheet latest = getTimeSheetWithBiggestDate(timeSheetList);
-                attendanceHR.add(latest);
+                if(!timeSheetList.isEmpty()) {
+                    TimeSheet latest = getTimeSheetWithBiggestDate(timeSheetList);
+                    attendanceHR.add(latest);
+                }
             }
         }
         return attendanceHR;

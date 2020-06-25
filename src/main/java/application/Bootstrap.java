@@ -44,7 +44,7 @@ public class Bootstrap {
 //       addMessages();
 //       seeMessages();
 //
-//       initAttendance();
+//         initAttendance();
 //       seeAttendance();
     }
 
