@@ -11,9 +11,11 @@ import sun.jvm.hotspot.utilities.Interval;
 
 import java.sql.Time;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TimeSheetServiceImpl implements TimeSheetService{
@@ -114,5 +116,59 @@ public class TimeSheetServiceImpl implements TimeSheetService{
             timeSheet.setWorkedHours(workedHours);
             insertTimeSheet(timeSheet);
         }
+    }
+
+    @Override
+    public List<TimeSheet> getAllTimeSheetForUser(User user) {
+        return getTimeSheetByUser(user);
+    }
+
+    @Override
+    public List<TimeSheet> getAllTimeSheetForUserBetweenDates(User user, Date startDate, Date endDate) {
+        List<TimeSheet> attendance = getTimeSheetByUser(user);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        List<TimeSheet> timeSheet = new ArrayList<>();
+        if (attendance != null) {
+            for (TimeSheet t:attendance) {
+                if (sdf.format(startDate).compareTo(sdf.format(t.getStart())) <= 0) {
+                    if (sdf.format(endDate).compareTo(sdf.format(t.getEnd())) >= 0) {
+                        timeSheet.add(t);
+                    }
+                }
+            }
+        }
+        return timeSheet;
+    }
+
+    @Override
+    public TimeSheet getTimeSheetWithBiggestDate(List<TimeSheet> timeSheets) {
+        TimeSheet timeSheet = null;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        if (timeSheets != null) {
+            for (TimeSheet t:timeSheets) {
+                for (TimeSheet tt:timeSheets) {
+                    if (sdf.format(t.getStart()).compareTo(sdf.format(tt.getStart())) >= 0) {
+                        timeSheet = t;
+                    }
+                    else {
+                        timeSheet = tt;
+                    }
+                }
+            }
+        }
+        return timeSheet;
+    }
+
+    @Override
+    public List<TimeSheet> getAllAttendanceForHR(List<User> employees) {
+        List<TimeSheet> attendanceHR = new ArrayList<>();
+        if (employees != null) {
+            for (User u:employees) {
+                List<TimeSheet> timeSheetList = getTimeSheetByUser(u);
+                TimeSheet latest = getTimeSheetWithBiggestDate(timeSheetList);
+                attendanceHR.add(latest);
+            }
+        }
+        return attendanceHR;
     }
 }

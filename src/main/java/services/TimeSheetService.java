@@ -22,4 +22,12 @@ public interface TimeSheetService {
 
     public TimeSheet getTimeSheetByDateAndUser(Date date, User user);
 
+    public List<TimeSheet> getAllTimeSheetForUser(User user);
+
+    public List<TimeSheet> getAllTimeSheetForUserBetweenDates(User user, Date startDate, Date endDate);
+
+    public List<TimeSheet> getAllAttendanceForHR(List<User> employees);
+
+    public TimeSheet getTimeSheetWithBiggestDate(List<TimeSheet> timeSheets);
+
 }
