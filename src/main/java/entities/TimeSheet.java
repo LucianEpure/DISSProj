@@ -13,7 +13,9 @@ public class TimeSheet {
     private Date start;
     private Date end;
     private String workedHours;
-
+    @ManyToOne()
+    @JoinColumn(name = "user_id")
+    private User employee;
 
     public void setId(int id){
         this.id = id;
@@ -27,6 +29,9 @@ public class TimeSheet {
     public void setWorkedHours(String time) {
         this.workedHours = time;
     }
+    public void setEmployee(User employee) {
+        this.employee = employee;
+    }
     public int getId() {
         return id;
     }
@@ -38,5 +43,8 @@ public class TimeSheet {
     }
     public String getWorkedHours() {
         return workedHours;
+    }
+    public User getEmployee() {
+        return employee;
     }
 }

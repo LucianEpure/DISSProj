@@ -50,10 +50,5 @@ public class UserServiceImpl implements UserService {
     public void addUser(User user) {
         userRepository.save(user);
     }
-    public void addAttendance(User user) {
-        User dbUser = userRepository.findByUsername(user.getUsername());
-        List<TimeSheet> attendance = user.getAttendance();
-        dbUser.setAttendance(attendance);
-//        userRepository.save(dbUser);
-    }
+
 }

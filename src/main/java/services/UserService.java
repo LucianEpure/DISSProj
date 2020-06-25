@@ -14,5 +14,5 @@ public interface UserService {
 
     void addUser(User user);
 
-    void addAttendance(User user);
+//    void addAttendance(User user);
 }
