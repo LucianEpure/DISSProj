@@ -19,10 +19,16 @@ public class UserController {
 
     @GetMapping("/users")
     public List<User> getUsers() {
-        return (List<User>) userService.getUsers();
+        List<User> users = userService.getUsers();
+        System.out.println("First is " + users.get(0).getUsername());
+        return users;
     }
-    @PostMapping("/users")
+
+    @PostMapping("/addUser")
     public void addUser(@RequestBody User user) {
+
+
+        System.out.println("User " + user.getUsername());
         userService.addUser(user);
     }
 
