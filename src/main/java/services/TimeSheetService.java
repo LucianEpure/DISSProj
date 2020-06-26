@@ -10,7 +10,7 @@ public interface TimeSheetService {
 
     public void insertTimeSheet(TimeSheet timeSheet);
 
-    public List<TimeSheet> getTimeSheetByUser(User user);
+    public List<TimeSheet> getTimeSheetByUser(String username);
 
     public List<TimeSheet> getAllTimeSheet();
 
@@ -22,7 +22,7 @@ public interface TimeSheetService {
 
     public TimeSheet getTimeSheetByDateAndUser(Date date, User user);
 
-    public List<TimeSheet> getAllTimeSheetForUser(User user);
+    public List<TimeSheet> getAllTimeSheetForUser(String username);
 
     public List<TimeSheet> getAllTimeSheetForUserBetweenDates(User user, Date startDate, Date endDate);
 

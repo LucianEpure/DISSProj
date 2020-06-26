@@ -34,8 +34,8 @@ public class TimeSheetServiceImpl implements TimeSheetService{
     }
 
     @Override
-    public List<TimeSheet> getTimeSheetByUser(User user) {
-        User dbUser = userRepository.findByUsername(user.getUsername());
+    public List<TimeSheet> getTimeSheetByUser(String username) {
+        User dbUser = userRepository.findByUsername(username);
         List<TimeSheet> timeSheetList = timeSheetRepository.findAll();
         List<TimeSheet> attendance = new ArrayList<>();
         if (timeSheetList != null) {
@@ -56,7 +56,7 @@ public class TimeSheetServiceImpl implements TimeSheetService{
 
     @Override
     public Boolean alreadyCheckedIn(User user) {
-        List<TimeSheet> attendance = getTimeSheetByUser(user);
+        List<TimeSheet> attendance = getTimeSheetByUser(user.getUsername());
         Date today = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
         if (attendance != null) {
@@ -71,7 +71,7 @@ public class TimeSheetServiceImpl implements TimeSheetService{
 
     @Override
     public TimeSheet getTimeSheetByDateAndUser(Date date, User user) {
-        List<TimeSheet> attendance = getTimeSheetByUser(user);
+        List<TimeSheet> attendance = getTimeSheetByUser(user.getUsername());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
         TimeSheet timeSheet = null;
         if (attendance != null) {
@@ -119,13 +119,13 @@ public class TimeSheetServiceImpl implements TimeSheetService{
     }
 
     @Override
-    public List<TimeSheet> getAllTimeSheetForUser(User user) {
-        return getTimeSheetByUser(user);
+    public List<TimeSheet> getAllTimeSheetForUser(String username) {
+        return getTimeSheetByUser(username);
     }
 
     @Override
     public List<TimeSheet> getAllTimeSheetForUserBetweenDates(User user, Date startDate, Date endDate) {
-        List<TimeSheet> attendance = getTimeSheetByUser(user);
+        List<TimeSheet> attendance = getTimeSheetByUser(user.getUsername());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
         List<TimeSheet> timeSheet = new ArrayList<>();
         if (attendance != null) {
@@ -164,7 +164,7 @@ public class TimeSheetServiceImpl implements TimeSheetService{
         List<TimeSheet> attendanceHR = new ArrayList<>();
         if (employees != null) {
             for (User u:employees) {
-                List<TimeSheet> timeSheetList = getTimeSheetByUser(u);
+                List<TimeSheet> timeSheetList = getTimeSheetByUser(u.getUsername());
                 if(!timeSheetList.isEmpty()) {
                     TimeSheet latest = getTimeSheetWithBiggestDate(timeSheetList);
                     attendanceHR.add(latest);

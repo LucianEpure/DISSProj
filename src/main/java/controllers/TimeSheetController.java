@@ -1,7 +1,9 @@
 package controllers;
 
 import converters.TimeSheetConverter;
+import converters.UserTimeSheetConverter;
 import dtos.TimeSheetDto;
+import dtos.UserTimeSheetDto;
 import entities.TimeSheet;
 import entities.User;
 import org.graalvm.compiler.lir.LIRInstruction;
@@ -19,11 +21,13 @@ public class TimeSheetController {
     private TimeSheetService timeSheetService;
     private UserService userService;
     private TimeSheetConverter timeSheetConverter;
+    private UserTimeSheetConverter userTimeSheetConverter;
 
     public TimeSheetController(TimeSheetService timeSheetService, UserService userService) {
        this.timeSheetService = timeSheetService;
        this.userService = userService;
        this.timeSheetConverter = new TimeSheetConverter();
+       this.userTimeSheetConverter = new UserTimeSheetConverter();
    }
 
  //  @GetMapping("/timesheet")
@@ -41,10 +45,15 @@ public class TimeSheetController {
 //        timeSheetService.checkOut(user);
 //    }
 
-//    @GetMapping("/timesheet")
-//    public List<TimeSheet> getAllTimeSheetForUser(User user) {
-//        return (List<TimeSheet>) timeSheetService.getAllTimeSheetForUser(User user);
-//    }
+    @GetMapping("/timesheetForEmployee/{username}")
+    public List<UserTimeSheetDto> getAllTimeSheetForUser(@PathVariable String username) {
+        List<TimeSheet> timeSheets = timeSheetService.getAllTimeSheetForUser(username);
+        List<UserTimeSheetDto> displayedTimeSheets = new ArrayList<>();
+        for(TimeSheet t: timeSheets){
+            displayedTimeSheets.add(userTimeSheetConverter.convertToDto(t));
+        }
+        return displayedTimeSheets;
+    }
 
 //    @GetMapping("/timesheet")
 //    public List<TimeSheet> getAllTimeSheetForUserBetweenDates(User user, Date startDate, Date endDate) {
@@ -54,12 +63,12 @@ public class TimeSheetController {
    @GetMapping("/timesheetsForHr")
    public List<TimeSheetDto> getAllAttendanceForHR() {
         List<User> employees = userService.getUsers();
-       List<TimeSheet> timeSheets = (List<TimeSheet>) timeSheetService.getAllAttendanceForHR(employees);
-       List<TimeSheetDto> displayedTimeSheets = new ArrayList<>();
-       for(TimeSheet timeSheet: timeSheets){
+        List<TimeSheet> timeSheets = (List<TimeSheet>) timeSheetService.getAllAttendanceForHR(employees);
+        List<TimeSheetDto> displayedTimeSheets = new ArrayList<>();
+        for(TimeSheet timeSheet: timeSheets){
             displayedTimeSheets.add(timeSheetConverter.convertToDto(timeSheet));
-       }
-       return displayedTimeSheets;
+        }
+        return displayedTimeSheets;
    }
 
 }
