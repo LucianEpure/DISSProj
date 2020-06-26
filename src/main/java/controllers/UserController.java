@@ -1,5 +1,6 @@
 package controllers;
 
+import dtos.MessageDto;
 import entities.User;
 import org.graalvm.compiler.lir.LIRInstruction;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,7 @@ public class UserController {
         this.userService = userService;
     }
 
+
     @GetMapping("/users")
     public List<User> getUsers() {
         List<User> users = userService.getUsers();
@@ -26,10 +28,13 @@ public class UserController {
 
     @PostMapping("/addUser")
     public void addUser(@RequestBody User user) {
-
-
         System.out.println("User " + user.getUsername());
         userService.addUser(user);
+    }
+
+    @GetMapping("/users/{username}")
+    public User getUserByUsername(@PathVariable String username) {
+        return userService.findUser(username);
     }
 
 }
