@@ -24,9 +24,9 @@ public class MessageServiceImpl implements MessageService{
 
 
     @Override
-    public List<Message> getMessages(User user) {
+    public List<Message> getMessages(String username) {
 
-        User dbUser = userRepository.findByUsername(user.getUsername());
+        User dbUser = userRepository.findByUsername(username);
         return dbUser.getMessages();
     }
 

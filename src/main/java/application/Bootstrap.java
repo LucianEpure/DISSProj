@@ -145,7 +145,7 @@ public class Bootstrap {
     {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy"); // use for date format
         User user1 = userService.findUser("Emp1");
-        List<Message> messages1 = messageService.getMessages(user1);
+        List<Message> messages1 = messageService.getMessages(user1.getUsername());
         System.out.println("Emp 1:");
         for(Message m: messages1){
             System.out.println(m.getTitle());
@@ -154,7 +154,7 @@ public class Bootstrap {
 
         System.out.println("Emp 2:");
         User user2 = userService.findUser("Emp2");
-        List<Message> messages2 = messageService.getMessages(user2);
+        List<Message> messages2 = messageService.getMessages(user2.getUsername());
         for(Message m: messages2){
             System.out.println(m.getTitle());
             System.out.println(formatter.format(m.getMessageDate()));

@@ -57,7 +57,6 @@ public class TimeSheetController {
        List<TimeSheet> timeSheets = (List<TimeSheet>) timeSheetService.getAllAttendanceForHR(employees);
        List<TimeSheetDto> displayedTimeSheets = new ArrayList<>();
        for(TimeSheet timeSheet: timeSheets){
-           System.out.println(timeSheet.getEmployee().getUsername());
             displayedTimeSheets.add(timeSheetConverter.convertToDto(timeSheet));
        }
        return displayedTimeSheets;
