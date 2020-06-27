@@ -1,5 +1,6 @@
 package controllers;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import dtos.MessageDto;
 import entities.User;
 import org.graalvm.compiler.lir.LIRInstruction;
@@ -17,7 +18,6 @@ public class UserController {
     public UserController(UserService userService){
         this.userService = userService;
     }
-
 
     @GetMapping("/users")
     public List<User> getUsers() {

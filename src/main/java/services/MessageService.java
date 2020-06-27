@@ -12,4 +12,6 @@ public interface MessageService {
     public void sendMessage(Message message);
 
     public Message addReceiverToMessage(Message message, User user);
+
+    public Message createMessage(String username, String subject, String content);
 }

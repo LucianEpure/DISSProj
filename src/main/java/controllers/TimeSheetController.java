@@ -1,5 +1,6 @@
 package controllers;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import converters.TimeSheetConverter;
 import converters.UserTimeSheetConverter;
 import dtos.TimeSheetDto;
@@ -37,13 +38,11 @@ public class TimeSheetController {
 //
     @PostMapping("/timesheetCheckIn")
     public void checkIn(@RequestBody String username) {
-        System.out.println("User " + username);
         timeSheetService.checkIn(username);
     }
 
     @PostMapping("/timesheetCheckOut")
     public void checkOut(@RequestBody String username) {
-        System.out.println("User " + username);
         timeSheetService.checkOut(username);
     }
 

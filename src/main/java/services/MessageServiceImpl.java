@@ -6,7 +6,7 @@ import org.graalvm.compiler.lir.LIRInstruction;
 import org.springframework.stereotype.Service;
 import repositories.MessageRepository;
 import repositories.UserRepository;
-
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,5 +56,16 @@ public class MessageServiceImpl implements MessageService{
         message.setReceivers(receivers);
 
         return message;
+    }
+
+    @Override
+    public Message createMessage(String username, String subject, String content) {
+        User sender = userRepository.findByUsername(username);
+        Message news = new Message();
+        news.setAuthor(sender);
+        news.setContent(content);
+        news.setTitle(subject);
+        news.setMessageDate(new Date());
+        return news;
     }
 }
