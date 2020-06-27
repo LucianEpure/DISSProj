@@ -5,6 +5,8 @@ import converters.MessageConverter;
 import dtos.MessageDto;
 import entities.Message;
 import entities.User;
+import netscape.javascript.JSObject;
+import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.web.bind.annotation.*;
 import services.MessageService;
 import services.UserService;
@@ -31,25 +33,26 @@ public class MessageController {
     public List<MessageDto> getAllMessagesForUser(@PathVariable String username) {
         List<Message> messages = messageService.getMessages(username);
         List<MessageDto> displayedMessages = new ArrayList<>();
-        for(Message message: messages){
-            displayedMessages.add(messageConverter.convertToDto(message));
+        if (!messages.isEmpty()){
+            for(Message message: messages){
+                displayedMessages.add(messageConverter.convertToDto(message));
+            }
         }
         return displayedMessages;
     }
 
-//    @PostMapping("/sendNews")
-//    public void sendNews(@RequestBody String username) {
-//        System.out.println("User " + username);
-////        Message message = messageService.createMessage(username, subject, content);
-////        List<User> users = userService.getUsers();
-////        List<User> receivers = new ArrayList<>();
-////        message.setReceivers(receivers);
-////        Message finalMessage = messageService.addReceiverToMessage(message, message.getAuthor());
-////        if (users != null) {
-////            for (User u:users) {
-////                finalMessage = messageService.addReceiverToMessage(finalMessage,u);
-////            }
-////        }
-////        messageService.sendMessage(finalMessage);
-//    }
+    @PostMapping("/sendNews")
+    public void sendNews(@RequestBody ArrayList<String> str) {
+        Message message = messageService.createMessage(str.get(0), str.get(1), str.get(2));
+        List<User> users = userService.getUsers();
+        List<User> receivers = new ArrayList<>();
+        message.setReceivers(receivers);
+        Message finalMessage = messageService.addReceiverToMessage(message, message.getAuthor());
+        if (users != null) {
+            for (User u:users) {
+                finalMessage = messageService.addReceiverToMessage(finalMessage,u);
+            }
+        }
+        messageService.sendMessage(finalMessage);
+    }
 }

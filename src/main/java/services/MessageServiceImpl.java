@@ -36,7 +36,7 @@ public class MessageServiceImpl implements MessageService{
         messageRepository.save(message);
 
         List<User> receivers = message.getReceivers();
-        if (receivers!=null){
+        if (!receivers.isEmpty()){
             for(User user: receivers){
                 User dbUser = userRepository.findByUsername(user.getUsername());
                 messages = dbUser.getMessages();

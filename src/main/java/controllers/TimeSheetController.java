@@ -50,9 +50,12 @@ public class TimeSheetController {
     public List<UserTimeSheetDto> getAllTimeSheetForUser(@PathVariable String username) {
         List<TimeSheet> timeSheets = timeSheetService.getAllTimeSheetForUser(username);
         List<UserTimeSheetDto> displayedTimeSheets = new ArrayList<>();
-        for(TimeSheet t: timeSheets){
-            displayedTimeSheets.add(userTimeSheetConverter.convertToDto(t));
+        if(!timeSheets.isEmpty()) {
+            for(TimeSheet t: timeSheets){
+                displayedTimeSheets.add(userTimeSheetConverter.convertToDto(t));
+            }
         }
+
         return displayedTimeSheets;
     }
 
@@ -66,9 +69,12 @@ public class TimeSheetController {
         List<User> employees = userService.getUsers();
         List<TimeSheet> timeSheets = (List<TimeSheet>) timeSheetService.getAllAttendanceForHR(employees);
         List<TimeSheetDto> displayedTimeSheets = new ArrayList<>();
-        for(TimeSheet timeSheet: timeSheets){
-            displayedTimeSheets.add(timeSheetConverter.convertToDto(timeSheet));
+        if (!timeSheets.isEmpty()) {
+            for(TimeSheet timeSheet: timeSheets){
+                displayedTimeSheets.add(timeSheetConverter.convertToDto(timeSheet));
+            }
         }
+
         return displayedTimeSheets;
    }
 
