@@ -35,15 +35,17 @@ public class TimeSheetController {
 //       return (List<TimeSheet>) timeSheetService.getAllTimeSheet();
 //    }
 //
-//    @PostMapping("/timesheet")
-//    public void checkIn(@RequestBody User user) {
-//        timeSheetService.checkIn(user);
-//    }
-//
-//    @PostMapping("/timesheet")
-//    public void checkOut(@RequestBody User user) {
-//        timeSheetService.checkOut(user);
-//    }
+    @PostMapping("/timesheetCheckIn")
+    public void checkIn(@RequestBody String username) {
+        System.out.println("User " + username);
+        timeSheetService.checkIn(username);
+    }
+
+    @PostMapping("/timesheetCheckOut")
+    public void checkOut(@RequestBody String username) {
+        System.out.println("User " + username);
+        timeSheetService.checkOut(username);
+    }
 
     @GetMapping("/timesheetForEmployee/{username}")
     public List<UserTimeSheetDto> getAllTimeSheetForUser(@PathVariable String username) {

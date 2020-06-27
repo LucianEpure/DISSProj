@@ -14,11 +14,11 @@ public interface TimeSheetService {
 
     public List<TimeSheet> getAllTimeSheet();
 
-    public void checkIn(User user);
+    public void checkIn(String user);
 
-    public void checkOut(User user);
+    public void checkOut(String user);
 
-    public Boolean alreadyCheckedIn(User user);
+    public Boolean alreadyCheckedIn(String user);
 
     public TimeSheet getTimeSheetByDateAndUser(Date date, User user);
 

@@ -3,6 +3,7 @@ package services;
 import entities.Role;
 import entities.TimeSheet;
 import entities.User;
+import org.graalvm.compiler.lir.LIRInstruction;
 import org.hibernate.internal.util.ZonedDateTimeComparator;
 import org.springframework.stereotype.Service;
 import repositories.TimeSheetRepository;
@@ -55,8 +56,8 @@ public class TimeSheetServiceImpl implements TimeSheetService{
     }
 
     @Override
-    public Boolean alreadyCheckedIn(User user) {
-        List<TimeSheet> attendance = getTimeSheetByUser(user.getUsername());
+    public Boolean alreadyCheckedIn(String user) {
+        List<TimeSheet> attendance = getTimeSheetByUser(user);
         Date today = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
         if (attendance != null) {
@@ -85,8 +86,9 @@ public class TimeSheetServiceImpl implements TimeSheetService{
     }
 
     @Override
-    public void checkIn(User user) {
-        if (alreadyCheckedIn(user) == false) {
+    public void checkIn(String username) {
+        if (alreadyCheckedIn(username) == false) {
+            User user = userRepository.findByUsername(username);
             TimeSheet timeSheet = new TimeSheet();
             timeSheet.setStart(new Date());
             timeSheet.setEmployee(user);
@@ -95,8 +97,9 @@ public class TimeSheetServiceImpl implements TimeSheetService{
     }
 
     @Override
-    public void checkOut(User user) {
-        if (alreadyCheckedIn(user) == true) {
+    public void checkOut(String username) {
+        if (alreadyCheckedIn(username) == true) {
+            User user = userRepository.findByUsername(username);
             TimeSheet timeSheet = getTimeSheetByDateAndUser(new Date(), user);
             timeSheet.setEnd(new Date());
             long diff = timeSheet.getEnd().getTime() - timeSheet.getStart().getTime();
