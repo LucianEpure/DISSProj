@@ -11,7 +11,12 @@ public class UserTimeSheetDto {
     }
 
     public void setStartDate(String startDate) {
-        this.startDate = startDate;
+        if (startDate != null) {
+            this.startDate = startDate;
+        }
+        else {
+            this.startDate = "";
+        }
     }
 
     public String getEndDate() {
@@ -19,7 +24,12 @@ public class UserTimeSheetDto {
     }
 
     public void setEndDate(String endDate) {
-        this.endDate = endDate;
+        if (endDate != null) {
+            this.endDate = endDate;
+        }
+        else {
+            this.endDate = "";
+        }
     }
 
     public String getWorkedHours() {
@@ -27,7 +37,12 @@ public class UserTimeSheetDto {
     }
 
     public void setWorkedHours(String workedHours) {
-        this.workedHours = workedHours;
+        if (workedHours != null) {
+            this.workedHours = workedHours;
+        }
+        else {
+            this.workedHours = "";
+        }
     }
 
 }

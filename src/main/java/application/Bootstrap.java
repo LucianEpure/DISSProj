@@ -38,12 +38,12 @@ public class Bootstrap {
     private void initialize(){
 //       initRoles();
 //       initUsers();
-//
+////
 //       addMessages();
-//       seeMessages();
-//
+////       seeMessages();
+////
 //       initAttendance();
-//       seeAttendance();
+////       seeAttendance();
     }
 
     private void initRoles() {

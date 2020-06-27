@@ -11,7 +11,12 @@ public class TimeSheetDto {
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        if (username != null) {
+            this.username = username;
+        }
+        else {
+            this.username = "";
+        }
     }
 
     public String getStartDate() {
@@ -19,7 +24,12 @@ public class TimeSheetDto {
     }
 
     public void setStartDate(String startDate) {
-        this.startDate = startDate;
+        if (startDate != null) {
+            this.startDate = startDate;
+        }
+        else {
+            this.startDate = "";
+        }
     }
 
     public String getEndDate() {
@@ -27,7 +37,12 @@ public class TimeSheetDto {
     }
 
     public void setEndDate(String endDate) {
-        this.endDate = endDate;
+        if (endDate != null) {
+            this.endDate = endDate;
+        }
+        else {
+            this.endDate = "";
+        }
     }
 
     public String getWorkedHours() {
@@ -35,6 +50,11 @@ public class TimeSheetDto {
     }
 
     public void setWorkedHours(String workedHours) {
-        this.workedHours = workedHours;
+        if (workedHours != null) {
+            this.workedHours = workedHours;
+        }
+        else {
+            this.workedHours = "";
+        }
     }
 }
